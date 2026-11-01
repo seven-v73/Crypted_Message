@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Messagerie chiffrée</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <!-- Écran d'accueil : chaque personne choisit son nom -->
+  <div class="join" id="join" hidden>
+    <div class="join-card">
+      <div class="brand"><span class="mark" id="brand-mark"></span>Messagerie chiffrée</div>
+      <h1>Rejoindre la conversation</h1>
+      <p class="lead">Vos clés sont créées sur cet ordinateur au moment où vous rejoignez. Elles n'en sortiront jamais.</p>
+      <form id="join-form">
+        <div class="field">
+          <label for="join-name">Votre nom</label>
+          <input class="input" id="join-name" autocomplete="off" maxlength="24" placeholder="Alice" required>
+        </div>
+        <div class="field">
+          <label for="join-relay">Adresse du relais</label>
+          <input class="input" id="join-relay" autocomplete="off" placeholder="http://192.168.1.10:5000" required>
+          <span class="hint">L'ordinateur sur lequel tourne relay.py.</span>
+        </div>
+        <p class="error-text" id="join-error" hidden></p>
+        <button class="btn primary" type="submit" id="join-btn">Rejoindre</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Messagerie -->
+  <div class="app" id="app" hidden>
+    <aside class="sidebar">
+      <div class="me">
+        <span class="avatar" id="me-avatar"></span>
+        <div>
+          <div class="name" id="me-name"></div>
+          <div class="conn"><span class="dot" id="conn-dot"></span><span id="conn-text"></span></div>
+        </div>
+      </div>
+      <div class="side-label">Protocole</div>
+      <nav class="side-list" id="protocols"></nav>
+      <div class="side-label">Contacts</div>
+      <div class="side-list" id="contacts"></div>
+      <div class="side-foot">Vos clés privées restent sur cet ordinateur.</div>
+    </aside>
+
+    <main class="chat">
+      <header class="chat-head">
+        <div class="grow">
+          <h1 id="chat-title"></h1>
+          <p id="chat-sub"></p>
+        </div>
+        <button class="btn ghost" id="btn-help" type="button"></button>
+        <button class="btn ghost" id="btn-keys" type="button"></button>
+      </header>
+      <div class="messages" id="messages"></div>
+      <form class="composer" id="composer">
+        <div class="toggles" id="toggles"></div>
+        <div class="composer-box">
+          <textarea id="text" rows="1" maxlength="2000" placeholder="Écrire un message"></textarea>
+          <button class="send" id="send" type="submit" title="Envoyer (Entrée)"></button>
+        </div>
+        <p class="error-text" id="send-error" hidden></p>
+      </form>
+    </main>
+
+    <aside class="inspector" id="inspector" hidden>
+      <header class="insp-head">
+        <h2 id="insp-title"></h2>
+        <button class="btn ghost icon-btn" id="insp-close" type="button" title="Fermer (Échap)"></button>
+      </header>
+      <div class="insp-body" id="insp-body"></div>
+    </aside>
+  </div>
+
+  <script src="/static/common.js"></script>
+  <script src="/static/client.js"></script>
+</body>
+</html>

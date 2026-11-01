@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eve · Console du relais</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="eve">
+  <div class="console">
+    <header class="console-bar">
+      <div class="who">
+        <span class="avatar">E</span>
+        <div><strong>Eve</strong><span id="where">Relais réseau</span></div>
+      </div>
+      <div class="share" id="share" hidden>
+        <span class="share-label">Adresse pour les participants</span>
+        <code id="share-url"></code>
+        <button class="btn" type="button" id="share-copy"></button>
+      </div>
+      <div class="people" id="people"></div>
+      <div class="switch">
+        <span class="hint" id="mode-hint"></span>
+        <div class="seg" id="mode">
+          <button type="button" data-mode="passive"></button>
+          <button type="button" data-mode="active" class="intercept-btn"></button>
+        </div>
+      </div>
+    </header>
+
+    <div class="console-main">
+      <section class="traffic">
+        <div class="traffic-head">
+          <h1>Trafic intercepté</h1>
+          <span class="fp" id="count"></span>
+          <div class="filters" id="filters"></div>
+        </div>
+        <div class="alerts" id="alerts"></div>
+        <div class="rows" id="rows"></div>
+      </section>
+
+      <aside class="inspector" id="inspector">
+        <header class="insp-head">
+          <h2 id="insp-title"></h2>
+          <button class="btn ghost icon-btn" id="insp-close" type="button" title="Fermer (Échap)"></button>
+        </header>
+        <div class="insp-body" id="insp-body"></div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="/static/common.js"></script>
+  <script src="/static/eve.js"></script>
+</body>
+</html>
