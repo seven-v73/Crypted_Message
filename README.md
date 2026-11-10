@@ -37,13 +37,20 @@ python3 -m venv .venv
 
 ## Lancer la démonstration
 
-### Sur une seule machine (pour tester)
+### Sur une seule machine, accessible par le réseau
+
+Sur la machine serveur, lancez le relais et les deux postes participants :
 
 ```bash
-./demo_local.sh
+.venv/bin/python relay.py
+.venv/bin/python client.py --port 5001 --relay http://127.0.0.1:5000
+.venv/bin/python client.py --port 5002 --relay http://127.0.0.1:5000
 ```
-Puis ouvrir : Eve http://localhost:5000, poste 1 http://localhost:5001, poste 2 http://localhost:5002.
-Sur chaque poste, saisir son nom (Alice, Bob…) puis « Rejoindre ».
+
+Les clients affichent des adresses comme `http://192.168.1.151:5001` et
+`http://192.168.1.151:5002`. Partagez ces adresses avec Alice et Bob.
+Chaque personne ouvre une adresse différente et choisit son nom.
+La machine serveur doit autoriser les ports TCP `5000`, `5001` et `5002` dans son pare-feu.
 
 ### Sur le réseau (trois machines)
 
@@ -57,11 +64,8 @@ Sur chaque poste, saisir son nom (Alice, Bob…) puis « Rejoindre ».
      Console d'Eve (sur cette machine)  :  http://localhost:5000
    ```
    La même adresse est affichée en haut de la console d'Eve, avec un bouton « Copier ».
-2. **Machine de chaque participant** (Alice, Bob…) :
-   ```bash
-   .venv/bin/python client.py
-   ```
-   Ouvrir http://localhost:5001, saisir son nom et l'adresse donnée par Eve, puis « Rejoindre ».
+2. **Depuis les machines des participants** (Alice, Bob…), ouvrir l’adresse réseau du poste
+   participant donnée par le serveur, puis saisir son nom et l’adresse du relais.
    L'adresse est mémorisée pour la fois suivante. On peut aussi la passer directement :
    `client.py --relay http://192.168.1.208:5000`.
 

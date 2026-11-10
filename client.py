@@ -192,8 +192,8 @@ if __name__ == "__main__":
     parser.add_argument("--name", help="rejoindre directement sous ce nom (sinon : choisi dans le navigateur)")
     parser.add_argument("--relay", default="http://127.0.0.1:5000", help="adresse du relais d'Eve")
     parser.add_argument("--port", type=int, default=5001)
-    parser.add_argument("--host", default="127.0.0.1",
-                        help="adresse de l'interface (127.0.0.1 : seule cette machine voit vos clés)")
+    parser.add_argument("--host", default="0.0.0.0",
+                        help="adresse d'écoute (0.0.0.0 : accessible sur le réseau)")
     args = parser.parse_args()
     cfg["relay"] = args.relay
 
@@ -203,7 +203,8 @@ if __name__ == "__main__":
             join(args.name.strip(), args.relay)
         except RelayError as e:
             print(f"Impossible de rejoindre le relais ({e}). Réessayez depuis le navigateur.")
-    print(f"Ouvrir http://localhost:{args.port} dans le navigateur de cette machine (relais : {args.relay})")
+    net = netinfo.lan_info(args.port)
+    print(f"Ouvrir depuis le réseau : {net['url']} (relais : {args.relay})")
     logging.getLogger("werkzeug").setLevel(logging.ERROR)  # pas une ligne par requête (sondage chaque seconde)
     flask.cli.show_server_banner = lambda *a, **k: None
     app.run(host=args.host, port=args.port, threaded=True)
